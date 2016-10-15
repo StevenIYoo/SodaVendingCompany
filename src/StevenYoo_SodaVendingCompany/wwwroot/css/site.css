@@ -1,0 +1,131 @@
+﻿/*site.css*/
+.sodaCompany {
+    max-width: 50px;
+    border: 1px solid #222;
+    padding: 3px;
+}
+
+.menu {
+    font-size: 12px;
+}
+
+.menu li {
+    list-style-type: none;
+}
+
+#sidebar a {
+    text-align:left;
+    margin-left: 5px;
+    width:95%;
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+#sidebarMenuStart {
+    margin-top: 10px;
+}
+
+#sidebar li {
+    text-align:left;
+}
+
+.menu li.active {
+    font-weight: bold;
+}
+
+#sidebar {
+    background: #ddf;
+    color: #eee;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    overflow: hidden;
+    left: 0;
+    transition: left ease .5s;
+}
+
+#sidebar.hide-sidebar {
+    left: -250px;
+    transition: left ease .5s;
+}
+
+#wrapper {
+    margin: 0 0 0 250px;
+    transition: margin-left ease .5s;
+}
+
+#wrapper.hide-sidebar {
+    margin-left: 0;
+    transition: margin-left ease .5s;
+}
+
+#map {
+    width: 100%;
+    height: 600px;
+}
+
+#vendingMachine img {
+    margin-top: 20px;
+    height: 200px;
+}
+
+#vendingMachine label {
+    height: 150px;
+    margin-top: 55px;
+    text-align: center;
+    font-size: 30px;
+    /*margin-left: 30px;*/
+}
+
+#vendingMachine .vend {
+    height: 150px;
+    margin-top: 55px;
+    text-align: center;
+    font-size: 30px;
+}
+
+#vendingMachine button {
+    height: 150px;
+    margin-top: 55px;
+    text-align: center;
+}
+
+/*#vendingMachine input[type="radio"] {
+    visibility: hidden;
+}*/
+
+#vendingMachine input[type="button"] {
+    visibility: hidden;
+}
+
+#vendingMachine .btn-group {
+    display: inline;
+}
+
+#footer {
+    margin-top: 100px;
+}
+
+#footer h4{
+    color: black;
+}
+
+.alert {
+    text-align: center;
+}
+
+body {
+    background-color:#fafafa;
+}
+
+.grid {
+    height: 600px;
+}
+
+#toggleFiltering {
+    margin-bottom: 5px;
+}
+
+.messageZone {
+    height: 100px;
+}
