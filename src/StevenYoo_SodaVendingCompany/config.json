@@ -1,0 +1,5 @@
+{
+  "Data": {
+    "VendingCompanyConnection": "Server=tcp:sodavendingco.database.windows.net,1433;Initial Catalog=SodaVendingCompany;Persist Security Info=False;User ID=Steven;Password=Z3sd6dpe;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  }
+}

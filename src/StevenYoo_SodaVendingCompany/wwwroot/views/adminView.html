@@ -1,0 +1,137 @@
+﻿<div class="row">
+    <div class="col-md-10">
+        <div class="text-danger" ng-show="viewModel.errorMessage">{{ viewModel.errorMessaage }}</div>
+    </div>
+</div>
+
+<div class="messageZone">
+    <div class="alert alert-success col-md-4 col-md-offset-3" id="adminSuccess" ng-show="viewModel.successStatus">
+        <button type="button" class="close" data-dismiss="alert"></button>
+        <strong>Success!</strong>
+        {{viewModel.successStatus}}
+    </div>
+
+    <div class="alert alert-warning col-md-4 col-md-offset-3" id="adminWarning" ng-show="viewModel.warningStatus">
+        <button type="button" class="close" data-dismiss="alert"></button>
+        <strong></strong>
+        {{viewModel.warningStatus}}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <wait-cursor display-when="viewModel.isBusy"></wait-cursor>
+
+        <md-button class="md-raised md-primary" ng-click="viewModel.hide = 'show'">Add New Soda</md-button>
+
+        <md-content layout-padding ng-show="viewModel.hide">
+            <form name="addSoda">
+                <div layout="row" layout-xs="column" layout-sm="column" layout-align="space-between center">
+                    <md-input-container>
+                        <md-switch ng-model="showHints">Showing {{showHints ? "Hints" : "Errors"}}</md-switch>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Soda Name</label>
+                        <input md-maxlength="30" required name="name" ng-model="viewModel.newSoda.SodaName" />
+
+                        <div class="hint" ng-if="showHints">What is your soda called?</div>
+
+                        <div ng-messages="addSoda.name.$error" ng-if="!showHints">
+                            <div ng-message="required">Soda name is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <div flex="5" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Soda Price</label>
+                        <input name="sodaPrice" ng-model="viewModel.newSoda.SodaPrice" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" />
+
+                        <div class="hint" ng-if="showHints">must be all numbers. Max of two decimal places</div>
+
+                        <div ng-messages="addSoda.sodaPrice.$error" ng-if="!showHints">
+                            <div ng-message="pattern">Not a valid money value</div>
+                        </div>
+                    </md-input-container>
+
+                </div>
+
+                <div layout-gt-sm="row">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Initial Soda Count</label>
+                        <input name="sodaCount" ng-model="viewModel.newSoda.Count"
+                               ng-pattern="/^[0-9]+/" />
+
+                        <div class="hint" ng-show="showHints">The number of sodas you're putting in</div>
+
+                        <div ng-messages="addSoda.SodaCount.$error" ng-if="!showHints">
+                            <div ng-message="pattern"> Must be a numeric value</div>
+                        </div>
+                    </md-input-container>
+
+                    <div flex="5" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Image Location</label>
+                        <input name="imageLocation" ng-model="viewModel.newSoda.ImageUrl"/>
+
+                        <div class="hint" ng-show="showHints">Display picture of your soda</div>
+                    </md-input-container>
+
+                    <style>
+                                     body[dir=rtl] .hint {
+                                         right: 2px;
+                                         left: auto;
+                                     }
+                    </style>
+                </div>
+
+                <md-button class="md-raised md-primary" ng-click="viewModel.createSoda()">Submit</md-button>
+            </form>
+        </md-content>
+
+        <form id="vendingMachine">
+            <md-content class="md-padding" layout-xs="column" layout="row" layout-align="center" flex="initial">
+                <div ng-repeat="soda in viewModel.sodas">
+                    <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <img src="{{soda.pictureUrl}}" alt="{{soda.name}}" />
+                                <span class="md-headline">{{soda.name}}</span>
+                                <span class="md-subhead">{{soda.price | currency}} - {{soda.name}}</span>
+                                <span class="md-subhead">{{soda.sodaCount}} sodas left</span>
+                                <span ng-if="soda.sodaCount <= 0">Needs a refill</span>
+                            </md-card-title-text>
+                            <md-card-title-media>
+                                <div class="md-media-lg card-media"></div>
+                            </md-card-title-media>
+                        </md-card-title>
+                        <md-card-actions layout="row">
+                            <md-button style="width: 100%" ng-disabled="soda.sodaCount <= 0" ng-click="viewModel.decrement(soda, soda.name)" class="md-raised md-primary">
+                                <i class="fa fa-arrow-left fa-3x"></i>
+                            </md-button>
+
+                            <md-button style="width: 100%" ng-click="viewModel.increment(soda, soda.name)" class="md-raised md-primary">
+                                <i class="fa fa-arrow-right fa-3x"></i>
+                            </md-button>
+                        </md-card-actions>
+                        <md-card-actions layout="row">
+                            <md-button name="vendingChoice" ng-click="viewModel.showPrompt($event, soda)" style="width: 100%" class="md-raised md-primary">
+                                Price Change - {{soda.price | currency}} 
+                            </md-button>
+                        </md-card-actions>
+                    </md-card>
+                </div>
+            </md-content>
+        </form>
+    </div>
+</div>

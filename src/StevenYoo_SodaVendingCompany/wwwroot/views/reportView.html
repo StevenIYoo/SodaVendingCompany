@@ -1,0 +1,11 @@
+﻿<wait-cursor display-when="viewModel.isBusy"></wait-cursor>
+
+<div class="col-md-8 col-md-offset-2">
+    <div class="text-danger" ng-show="viewModel.errorMessage">{{ viewModel.errorMessaage }}</div>
+
+    <div class="row">
+        <button id='toggleFiltering' ng-click="toggleFiltering()" class="btn btn-success col-md-offset-5">Toggle Filtering</button>
+    </div>
+    <div id="reportGrid" ui-grid="reportGrid" ui-grid-selection ui-grid-exporter  class="grid"></div>
+
+</div>

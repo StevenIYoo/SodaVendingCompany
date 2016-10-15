@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Soda Vending Company - @ViewBag.Title</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootswatch/spacelab/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/angular-ui-grid/ui-grid.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/angular-material/angular-material.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div data-ng-app="app-reports">
+        <div id="sidebar">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <img src="~/images/soda.jpg" alt="Soda Vending Company" class="sodaCompany" />
+                <span id="username">@User.Identity.Name</span>
+            }
+            <div class="row" id="sidebarMenuStart">
+                <div class="col-md-12">
+                    <a ng-href="#/" class="btn btn-sm btn-info"><i class="fa fa-home fa-lg fa-fw"></i>&nbsp; Home</a>
+                </div>
+
+                @if (!User.Identity.IsAuthenticated)
+            {
+                    <div class="col-md-12"><a class="btn btn-sm btn-info" asp-controller="Authorization" asp-action="Login"><i class="fa fa-key fa-lg fa-fw"></i>&nbsp; Login</a></div>
+                }
+                @if (User.Identity.IsAuthenticated)
+            {
+                    <div class="col-md-12"><a ng-href="#/reports" class="btn btn-sm btn-info"><i class="fa fa-file-text fa-lg fa-fw"></i>&nbsp; Report</a></div>
+                    <div class="col-md-12"><a ng-href="#/admin" class="btn btn-sm btn-info"><i class="fa fa-wrench fa-lg fa-fw"></i>&nbsp; Admin</a></div>
+                    <div class="col-md-12"><a class="btn btn-sm btn-info" asp-controller="Authorization" asp-action="Logout"><i class="fa fa-key fa-lg fa-fw"></i>&nbsp; Logout</a></div>
+                }
+            </div>
+
+        </div>
+
+        <div id="wrapper" class="container-fluid">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid" style="text-align: right;">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <button id="sidebarToggle" class="btn btn-primary">
+                                <i class="fa fa-angle-left"></i>
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="row"><a ng-href="#/" class="col-md-offset-1 col-md-10">Soda Vending Co</a></div>
+                </div>
+            </nav>
+            <div id="main" class="container-fluid">
+                <div class="row">
+                    <div ng-view></div>
+                </div>
+                @RenderBody()
+            </div>
+
+            <div id="footer" class="container-fluid">
+                <div class="navbar navbar-inverse navbar-fixed-bottom">
+                    <h4 class="text-center text-info">&copy; 2016 Soda Vending Company</h4>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/js/site.js"></script>
+        @RenderSection("scripts", false)
+    </div>
+</body>
+
+</html>

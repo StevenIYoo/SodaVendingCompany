@@ -1,0 +1,49 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="text-danger" ng-show="viewModel.errorMessage">{{ viewModel.errorMessaage }}</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="messageZone" >
+            <div class="alert alert-success col-md-4 col-md-offset-3" id="adminSuccess" ng-show="viewModel.successStatus">
+                <button type="button" class="close" data-dismiss="alert"></button>
+                <strong>{{viewModel.successStatus}}</strong>
+            </div>
+
+            <div class="alert alert-warning col-md-4 col-md-offset-3" id="adminWarning" ng-show="viewModel.warningStatus">
+                <button type="button" class="close" data-dismiss="alert"></button>
+                <strong></strong>
+                {{viewModel.warningStatus}}
+            </div>
+        </div>
+
+        <wait-cursor display-when="viewModel.isBusy"></wait-cursor>
+        <form id="vendingMachine" ng-submit="viewModel.vendSoda()">
+            <div class="btn-group" role="radiogroup">
+                <md-content class="md-padding" layout-xs="column" layout="row" layout-align="center" flex="initial">
+                    <div ng-repeat="soda in viewModel.sodas">
+                        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <img src="{{soda.pictureUrl}}" alt="{{soda.name}}" />
+                                    <span class="md-headline">{{soda.name}}</span>
+                                    <span class="md-subhead">{{soda.price | currency}} - {{soda.name}}</span>
+                                    <span class="md-subhead">{{soda.sodaCount}} sodas left</span>
+                                    <span ng-if="soda.sodaCount <= 0" >Sold out!</span>
+                                </md-card-title-text>
+                                <md-card-title-media>
+                                    <div class="md-media-lg card-media"></div>
+                                </md-card-title-media>
+                            </md-card-title>
+                            <md-card-actions layout="row">
+                                <md-button style="width: 100%" ng-disabled="{{soda.sodaCount}} <= 0" ng-click="viewModel.vendSoda(soda.name)" class="md-raised md-primary">Vend</md-button>
+                            </md-card-actions>
+                        </md-card>
+                    </div>
+                </md-content>
+            </div>
+        </form>
+    </div>
+</div>
